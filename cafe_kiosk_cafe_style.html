@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>카페 키오스크</title>
+<style>
+:root{--brown:#58483e;--deep:#563314;--orange:#ffab19;--ink:#302820;--line:#e5dfd8}*{box-sizing:border-box}body{margin:0;background:var(--brown);color:var(--ink);font-family:Arial,'Malgun Gothic',sans-serif;font-size:20px}button,input{font:inherit}button{cursor:pointer;border:0}button:focus-visible,input:focus-visible{outline:4px solid #176cca;outline-offset:4px}button:disabled{cursor:default;opacity:.5}.app{max-width:1180px;margin:auto;padding:28px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;color:white;margin-bottom:26px}.brand{font-size:clamp(30px,5vw,54px);font-weight:900;letter-spacing:-2px}.brand span{color:var(--orange)}.sub{font-size:18px;letter-spacing:0;color:#eee1d5;margin-top:8px}.service{display:flex;gap:8px}.service button{padding:16px 22px;border-radius:8px;background:#ede8df;color:#4b4037;font-weight:bold;min-height:60px}.service button.active{background:var(--orange);color:#33250b}.tabs{display:flex;gap:14px}.tab{background:#fff;color:#b66b00;padding:20px 38px;border-radius:12px 12px 0 0;font-size:28px;font-weight:bold}.tab-note{align-self:center;color:#f2e4d4;font-size:18px}.menu-panel{background:white;border-radius:0 12px 12px 12px;padding:28px;margin-bottom:24px}.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.menu-card{position:relative;background:#fff;border:2px solid var(--line);border-radius:12px;padding:20px 14px;text-align:center;color:var(--ink);min-height:325px}.menu-card:hover{border-color:#ca8100;background:#fffaf0}.menu-card.active{border-color:#ac6100;background:var(--orange)}.cup{width:150px;height:180px;display:block;margin:0 auto 12px}.menu-name{font-size:28px;font-weight:900;display:block}.price{display:block;font-size:26px;color:#a25b00;font-weight:bold;margin:8px 0}.menu-card.active .price{color:#452b09}.badge{position:absolute;top:14px;left:14px;background:#f4eadd;color:#654524;border-radius:4px;padding:5px 9px;font-size:16px;font-weight:bold}.menu-card.active .badge{background:#583714;color:white}.picker{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0 0;margin-top:22px;border-top:1px solid var(--line);flex-wrap:wrap}.chosen{font-size:24px;font-weight:bold}.quantity{display:flex;align-items:center;gap:12px}.step{width:54px;height:54px;background:var(--orange);border-radius:6px;font-size:30px;font-weight:bold;color:#40290b}.qty-input{width:84px;text-align:center;height:54px;border:2px solid var(--line);border-radius:6px;font-size:26px}.add{background:var(--deep);color:white;border-radius:8px;padding:18px 28px;font-size:25px;font-weight:bold}.order-panel{background:white;border-radius:22px;padding:28px}.order-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}h2{margin:0;font-size:30px}.clear{background:#eee9e3;color:#51473c;padding:12px 18px;border-radius:6px}.order-layout{display:grid;grid-template-columns:1fr 260px;gap:28px}.cart{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.empty{grid-column:1/-1;padding:40px 16px;background:#faf8f5;border:1px dashed #c8bdb0;border-radius:8px;color:#726456;text-align:center}.cart-card{border:1px solid var(--line);border-radius:8px;padding:14px;position:relative;text-align:center}.cart-card .cup{width:85px;height:104px;margin:5px auto}.cart-name{font-size:21px;font-weight:bold}.cart-price{color:#955500;font-size:20px;margin:7px 0}.remove{position:absolute;top:6px;right:6px;background:#eee9e3;color:#534437;width:36px;height:36px;font-size:24px;border-radius:4px}.cart-controls{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px;gap:5px}.cart-controls .step{width:40px;height:40px;font-size:25px}.cart-controls strong{font-size:24px}.summary{border-left:1px solid var(--line);padding-left:24px}.summary-label{color:#77695b;font-size:22px}.total{font-size:36px;font-weight:900;margin:10px 0 8px;overflow-wrap:anywhere}.count{font-size:18px;color:#756657;margin-bottom:22px}.checkout{width:100%;background:var(--deep);color:white;padding:24px 12px;border-radius:8px;font-size:30px;font-weight:bold}.notice{min-height:28px;margin:16px 0 0;font-size:18px;color:#655340}.footer{color:#e3d7ca;font-size:15px;margin:16px 0;text-align:center}dialog{border:0;border-radius:16px;padding:30px;width:min(560px,92vw);color:var(--ink)}dialog::backdrop{background:rgba(25,18,12,.6)}dialog h2{margin-bottom:14px}.receipt-row{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:21px}.receipt-total{font-size:28px;font-weight:bold;padding:22px 0}.dialog-actions{display:flex;gap:12px}.dialog-actions button{flex:1;padding:17px 10px;border-radius:8px;font-weight:bold}.back{background:#eee9e3}.new{background:var(--deep);color:white}
+@media(max-width:850px){header{align-items:flex-start;flex-direction:column}.order-layout{grid-template-columns:1fr}.summary{border-left:0;border-top:1px solid var(--line);padding:20px 0 0}.menu-card{min-height:280px}.cup{width:120px;height:150px}.menu-name{font-size:24px}.menu-grid{gap:12px}.picker{justify-content:flex-start}}
+@media(max-width:540px){.app{padding:14px}.service{width:100%}.service button{flex:1;padding:14px}.menu-panel,.order-panel{padding:18px}.menu-grid{grid-template-columns:1fr}.menu-card{min-height:130px;display:grid;grid-template-columns:105px 1fr;align-items:center;text-align:left;padding:16px}.menu-card .cup{width:85px;height:110px;margin:0;grid-row:1/4}.menu-card .badge{position:static;justify-self:start}.menu-name{font-size:25px}.price{font-size:24px}.cart{grid-template-columns:1fr}.cart-card{display:grid;grid-template-columns:90px 1fr;align-items:center}.cart-card .cup{grid-row:1/4}.cart-controls{grid-column:2}.cart-name{padding-right:30px}.picker{gap:16px}.add{width:100%}.tab-note{display:none}.dialog-actions{flex-direction:column}}
+</style>
+</head>
+<body>
+<main class="app">
+<header><div><div class="brand">CAFE <span>오늘</span></div><div class="sub">이용 방식을 선택하고 메뉴를 담아 주세요.</div></div><div class="service" role="group" aria-label="이용 방식"><button id="takeout" aria-pressed="false" type="button">포장하기</button><button id="store" aria-pressed="false" type="button">매장에서</button></div></header>
+<div class="tabs"><div class="tab">커피 메뉴</div><div class="tab-note">메뉴 선택 → 수량 입력 → 주문내역에 담기</div></div>
+<section class="menu-panel" aria-label="메뉴 선택"><div class="menu-grid" id="menu"></div><div class="picker"><div class="chosen" id="chosen">메뉴를 선택해 주세요.</div><div class="quantity"><label for="quantity">수량</label><button class="step" id="minus" aria-label="수량 줄이기">−</button><input class="qty-input" id="quantity" type="number" min="1" max="99" step="1" value="1" inputmode="numeric"><button class="step" id="plus" aria-label="수량 늘리기">＋</button></div><button class="add" id="add">주문내역에 담기</button></div><p class="notice" id="notice" role="status" aria-live="polite">포장하기 또는 매장에서를 선택해 주세요.</p></section>
+<section class="order-panel" aria-labelledby="order-title"><div class="order-head"><h2 id="order-title">선택 메뉴</h2><button class="clear" id="clear">전체 비우기</button></div><div class="order-layout"><div class="cart" id="cart"></div><div class="summary"><div class="summary-label">총 주문 금액</div><div class="total" id="total">0원</div><div class="count" id="count">총 0잔 · 이용 방식 미선택</div><button class="checkout" id="checkout">계산하기</button></div></div></section>
+<p class="footer">체험용 키오스크입니다. 실제 결제 및 매장 주문 전송은 이루어지지 않습니다.</p>
+</main>
+<dialog id="receipt" aria-labelledby="receipt-title"><h2 id="receipt-title">주문 계산 결과</h2><p id="receipt-service"></p><div id="receipt-items"></div><div class="receipt-total" id="receipt-total"></div><div class="dialog-actions"><button class="back" id="back">주문 수정하기</button><button class="new" id="new">새 주문 시작</button></div></dialog>
+<script>
+'use strict';
+const menus = [
+  {name:'아메리카노', price:2500, color:'#563522', badge:'기본 커피'},
+  {name:'카페라떼', price:3000, color:'#b38a63', badge:'부드러운 맛'},
+  {name:'바닐라라떼', price:3300, color:'#c7a17a', badge:'달콤한 맛'}
+];
+let service = '', selected = null;
+const cart = new Map();
+const el = id => document.getElementById(id);
+const won = value => value.toLocaleString('ko-KR') + '원';
+function cup(color) {
+  return `<svg class="cup" viewBox="0 0 150 180" aria-hidden="true"><path d="M26 35 L40 156 Q75 173 110 156 L124 35 Z" fill="#f3f0e9" stroke="#c7c2b8" stroke-width="2"/><path d="M30 39 L44 152 Q58 157 69 157 L59 42 Z" fill="#ffffff"/><ellipse cx="75" cy="35" rx="49" ry="15" fill="#ddd8cd" stroke="#c7c2b8" stroke-width="2"/><ellipse cx="75" cy="37" rx="43" ry="10" fill="${color}"/><path d="M34 42 Q75 58 117 42" fill="none" stroke="#fff" stroke-width="4"/><circle cx="77" cy="101" r="20" fill="none" stroke="#d7831b" stroke-width="3"/><text x="77" y="107" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="bold" fill="#b7680f">C</text></svg>`;
+}
+el('menu').innerHTML = menus.map((m,i) => `<button class="menu-card" data-menu="${i}" aria-pressed="false"><span class="badge">${m.badge}</span>${cup(m.color)}<span class="menu-name">${m.name}</span><span class="price">${won(m.price)}</span></button>`).join('');
+function notify(text) { el('notice').textContent = text; }
+function chooseService(value) {
+  service = value;
+  ['takeout','store'].forEach(id => {
+    const active = (id === 'takeout' ? '포장하기' : '매장에서') === value;
+    el(id).classList.toggle('active',active);
+    el(id).setAttribute('aria-pressed',String(active));
+  });
+  notify(value + '를 선택했습니다. 메뉴와 수량을 선택해 주세요.');
+  renderCart();
+}
+el('takeout').onclick = () => chooseService('포장하기');
+el('store').onclick = () => chooseService('매장에서');
+el('menu').addEventListener('click', event => {
+  const button = event.target.closest('[data-menu]');
+  if (!button) return;
+  selected = Number(button.dataset.menu);
+  document.querySelectorAll('[data-menu]').forEach(b => {
+    const active = Number(b.dataset.menu) === selected;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-pressed', String(active));
+  });
+  el('chosen').textContent = menus[selected].name + ' · ' + won(menus[selected].price);
+  notify(menus[selected].name + ' 선택 · 수량을 정한 후 주문내역에 담아 주세요.');
+});
+function adjustQuantity(delta) {
+  let value = Number(el('quantity').value);
+  if (!Number.isInteger(value)) value = 1;
+  el('quantity').value = Math.max(1, Math.min(99, value + delta));
+}
+el('minus').onclick = () => adjustQuantity(-1);
+el('plus').onclick = () => adjustQuantity(1);
+el('add').onclick = () => {
+  if (!service) { notify('먼저 포장하기 또는 매장에서를 선택해 주세요.'); el('takeout').focus(); return; }
+  if (selected === null) { notify('담을 메뉴를 선택해 주세요.'); document.querySelector('[data-menu]').focus(); return; }
+  const qty = Number(el('quantity').value);
+  if (!Number.isInteger(qty) || qty < 1 || qty > 99) { notify('수량은 1부터 99까지의 정수로 입력해 주세요.'); el('quantity').focus(); return; }
+  const next = (cart.get(selected) || 0) + qty;
+  if (next > 99) { notify('한 메뉴는 최대 99잔까지 담을 수 있습니다.'); return; }
+  cart.set(selected,next);
+  renderCart();
+  notify(menus[selected].name + ' ' + qty + '잔을 담았습니다. 다른 메뉴를 더 담거나 계산하기를 눌러 주세요.');
+};
+function totals() {
+  let sum = 0, count = 0;
+  cart.forEach((qty,id) => { sum += menus[id].price * qty; count += qty; });
+  return {sum,count};
+}
+function renderCart() {
+  el('cart').innerHTML = cart.size ? [...cart].map(([id,qty]) => {
+    const m = menus[id];
+    return `<article class="cart-card"><button class="remove" data-id="${id}" data-action="remove" aria-label="${m.name} 삭제">×</button>${cup(m.color)}<div class="cart-name">${m.name}</div><div class="cart-price">${won(m.price * qty)}</div><div class="cart-controls"><button class="step" data-id="${id}" data-action="minus" aria-label="${m.name} 수량 줄이기">−</button><strong>${qty}</strong><button class="step" data-id="${id}" data-action="plus" aria-label="${m.name} 수량 늘리기" ${qty >= 99 ? 'disabled' : ''}>＋</button></div></article>`;
+  }).join('') : '<div class="empty">담은 메뉴가 없습니다.<br>위에서 메뉴와 수량을 선택해 주세요.</div>';
+  const {sum,count} = totals();
+  el('total').textContent = won(sum);
+  el('count').textContent = '총 ' + count + '잔 · ' + (service || '이용 방식 미선택');
+  el('clear').disabled = !cart.size;
+}
+el('cart').addEventListener('click', event => {
+  const b = event.target.closest('[data-action]');
+  if (!b) return;
+  const id = Number(b.dataset.id), action = b.dataset.action;
+  let qty = cart.get(id);
+  if (action === 'remove' || (action === 'minus' && qty === 1)) cart.delete(id);
+  else cart.set(id,Math.min(99,qty + (action === 'plus' ? 1 : -1)));
+  renderCart();
+  notify('주문내역을 변경했습니다.');
+});
+el('clear').onclick = () => { cart.clear(); renderCart(); notify('주문내역을 모두 비웠습니다.'); };
+el('checkout').onclick = () => {
+  if (!cart.size) { notify('먼저 메뉴를 주문내역에 담아 주세요.'); return; }
+  const {sum,count} = totals();
+  el('receipt-service').textContent = '이용 방식: ' + service;
+  el('receipt-items').innerHTML = [...cart].map(([id,qty]) => `<div class="receipt-row"><span>${menus[id].name} × ${qty}잔</span><strong>${won(menus[id].price * qty)}</strong></div>`).join('');
+  el('receipt-total').textContent = '총 ' + count + '잔 · ' + won(sum);
+  el('receipt').showModal();
+};
+el('back').onclick = () => el('receipt').close();
+el('new').onclick = () => {
+  el('receipt').close(); cart.clear(); selected = null; service = '';
+  el('quantity').value = 1;
+  document.querySelectorAll('[data-menu],.service button').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+  el('chosen').textContent = '메뉴를 선택해 주세요.';
+  renderCart(); notify('새 주문입니다. 포장하기 또는 매장에서를 선택해 주세요.');
+  el('takeout').focus();
+};
+renderCart();
+</script>
+</body>
+</html>
